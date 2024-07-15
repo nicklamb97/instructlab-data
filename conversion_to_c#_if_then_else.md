@@ -7,15 +7,15 @@ OpenROAD, which uses Actian 4GL, is a powerful application development tool that
 
 ### Actian 4GL
 ```4gl
-DEFINE age INTEGER
-LET age = 20
+DEFINE age INTEGER;
+LET age = 20;
 IF age < 18 THEN
-DISPLAY "You are a minor."
-ELSE IF age >= 18 AND age < 65 THEN
-DISPLAY "You are an adult."
+    MESSAGE "You are a minor.";
+ELSEIF age >= 18 AND age < 65 THEN
+    MESSAGE "You are an adult.";
 ELSE
-DISPLAY "You are a senior."
-END IF
+    MESSAGE "You are a senior.";
+ENDIF;
 ```
 
 ### C#
@@ -43,15 +43,15 @@ In C#, Console.WriteLine is used for displaying the message.
 ## Example 2: Temperature Classification
 ### Actian 4GL
 ```4gl
-DEFINE temperature DECIMAL(5,2)
-LET temperature = 72.5
+DEFINE temperature DECIMAL(5,2);
+LET temperature = 72.5;
 IF temperature < 60 THEN
-    DISPLAY "It's cold."
-ELSE IF temperature >= 60 AND temperature < 80 THEN
-    DISPLAY "It's pleasant."
+    MESSAGE "It's cold.";
+ELSEIF temperature >= 60 AND temperature < 80 THEN
+    MESSAGE "It's pleasant.";
 ELSE
-    DISPLAY "It's hot."
-END IF
+    MESSAGE "It's hot.";
+ENDIF;
 ```
 
 ### C#
@@ -79,19 +79,19 @@ In C#, the temperature is of type decimal, denoted with an M.
 ## Example 3: Grade Evaluation
 ### Actian 4GL
 ```4gl
-DEFINE grade CHAR(1)
-LET grade = 'B'
+DEFINE grade CHAR(1);
+LET grade = 'B';
 IF grade = 'A' THEN
-    DISPLAY "Excellent!"
-ELSE IF grade = 'B' THEN
-    DISPLAY "Good!"
-ELSE IF grade = 'C' THEN
-    DISPLAY "Average."
-ELSE IF grade = 'D' THEN
-    DISPLAY "Below Average."
+    MESSAGE "Excellent!";
+ELSEIF grade = 'B' THEN
+    MESSAGE "Good!";
+ELSEIF grade = 'C' THEN
+    MESSAGE "Average.";
+ELSEIF grade = 'D' THEN
+    MESSAGE "Below Average.";
 ELSE
-    DISPLAY "Failing."
-END IF
+    MESSAGE "Failing.";
+ENDIF;
 ```
 
 C#
@@ -127,15 +127,15 @@ In C#, the grade is of type char.
 ## Example 4: Income Classification
 ### Actian 4GL
 ```4gl
-DEFINE salary DECIMAL(10,2)
-LET salary = 55000.00
+DEFINE salary DECIMAL(10,2);
+LET salary = 55000.00;
 IF salary < 30000 THEN
-    DISPLAY "Low income."
-ELSE IF salary >= 30000 AND salary < 70000 THEN
-    DISPLAY "Middle income."
+    MESSAGE "Low income.";
+ELSEIF salary >= 30000 AND salary < 70000 THEN
+    MESSAGE "Middle income.";
 ELSE
-    DISPLAY "High income."
-END IF
+    MESSAGE "High income.";
+ENDIF;
 ```
 
 C#
@@ -163,15 +163,15 @@ In C#, the salary is of type decimal, denoted with an M.
 ## Example 5: Discount Calculation
 ### Actian 4GL
 ```4gl
-DEFINE totalPurchase DECIMAL(10,2)
-LET totalPurchase = 120.50
+DEFINE totalPurchase DECIMAL(10,2);
+LET totalPurchase = 120.50;
 IF totalPurchase < 50 THEN
-    DISPLAY "No discount."
-ELSE IF totalPurchase >= 50 AND totalPurchase < 100 THEN
-    DISPLAY "5% discount."
+    MESSAGE "No discount.";
+ELSEIF totalPurchase >= 50 AND totalPurchase < 100 THEN
+    MESSAGE "5% discount.";
 ELSE
-    DISPLAY "10% discount."
-END IF
+    MESSAGE "10% discount.";
+ENDIF;
 ```
 
 C#
