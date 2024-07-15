@@ -7,10 +7,9 @@ The `while` statement in Actian 4GL (Ingres 4GL) is used to create a loop that e
 The basic syntax of the `while` statement in Actian 4GL is as follows:
 
 ```4gl
-while condition
-do
+while condition do
     -- statements to execute
-endwhile
+endwhile;
 ```
 
 condition: 
@@ -26,32 +25,12 @@ The endloop statement can be used to exit the while loop before the condition be
 This example demonstrates a while loop that prints numbers from 1 to 3.
 
 ```4gl
-define i integer = 1
+define i integer = 1;
 
-while i <= 3
-do
-    call printf("%d\n", i)
-    let i = i + 1
-endwhile
-```
-
-## User Input Loop
-
-This example demonstrates a while loop that keeps asking for user input until the user enters the number 0.
-
-```4gl
-define user_input integer
-
-call printf("Enter a number (0 to exit): ")
-call scanf("%d", user_input)
-
-while user_input != 0
-do
-    call printf("You entered: %d\n", user_input)
-    call printf("Enter another number (0 to exit): ")
-    call scanf("%d", user_input)
-endwhile
-call printf("Exited the loop.\n")
+while i <= 3 do
+    MESSAGE I;
+    let i = i + 1;
+endwhile;
 ```
 
 ## Loop with Early Exit Using endloop
@@ -59,17 +38,14 @@ call printf("Exited the loop.\n")
 This example shows how to use the endloop statement to exit the loop early if a certain condition is met.
 
 ```4gl
-define i integer = 1
+define i integer = 1;
 
-while true
-do
-    call printf("%d\n", i)
-    let i = i + 1
-
+while true do
+    let i = i + 1;
     if i > 3 then
-        endloop
-    endif
-endwhile
+        endloop;
+    endif;
+endwhile;
 ```
 
 ## Counting Down
@@ -77,11 +53,10 @@ endwhile
 This example demonstrates a while loop that counts down from 3 to 1.
 
 ```4gl
-define i integer = 3
+define i integer = 3;
 
-while i > 0
-do
-    call printf("%d\n", i)
-    let i = i - 1
-endwhile
+while i > 0 do
+    MESSAGE i;
+    let i = i - 1;
+endwhile;
 ```
