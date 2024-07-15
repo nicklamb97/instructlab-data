@@ -8,7 +8,7 @@ The sleep statement in Actian 4GL is used to pause the execution of a program fo
 sleep duration
 ```
 
-duration: Specifies the time to sleep in seconds. It can be a decimal number.
+duration: Specifies the time to sleep in seconds. The number must be an integer literal or variable.
 
 ## Basic Sleep Example
 
@@ -22,20 +22,6 @@ do
     sleep 2  -- Sleep for 2 seconds
 endwhile
 call printf("Finished.\n")
-```
-
-## Sleep with Fractional Seconds
-
-```4gl
-define i integer = 1
-
-while i <= 3
-do
-    call printf("Countdown: %d\n", 4 - i)
-    let i = i + 1
-    sleep 0.5  -- Sleep for 0.5 seconds (500 milliseconds)
-endwhile
-call printf("Liftoff!\n")
 ```
 
 ## Pause Before User Input
@@ -56,5 +42,5 @@ call printf("End of program.\n")
 ```
 
 ## Notes
-The sleep duration can be a fractional number to specify milliseconds or shorter time intervals.
-sleep is a blocking operation, meaning it pauses the entire program execution during the sleep period.
+The sleep duration cannot be a fractional number. sleep is a blocking operation, meaning it pauses the entire 
+program execution during the sleep period.
