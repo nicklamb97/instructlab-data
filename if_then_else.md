@@ -11,21 +11,21 @@ The basic syntax of the IF-THEN-ELSE statement in Actian 4GL is as follows:
 ```4gl
 IF condition THEN
     statements
-ELSE IF condition THEN
+ELSEIF condition THEN
     statements
 ELSE
     statements
-END IF
+ENDIF;
 ```
 
 ## Key Points
 
 ### Optional Clauses
 
-- The ELSE IF and ELSE clauses are optional.
+- The ELSEIF and ELSE clauses are optional.
 - An IF statement can be as simple as a single condition and a single block of statements to execute if that condition 
 is true.
-- Multiple ELSE IF clauses can be included to check additional conditions sequentially.
+- Multiple ELSEIF clauses can be included to check additional conditions sequentially.
 
 ### Boolean Evaluation
 
