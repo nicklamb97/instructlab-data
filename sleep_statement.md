@@ -5,7 +5,7 @@ The sleep statement in Actian 4GL is used to pause the execution of a program fo
 ## Syntax
 
 ```4gl
-sleep duration
+sleep duration;
 ```
 
 duration: Specifies the time to sleep in seconds. The number must be an integer literal or variable.
@@ -13,32 +13,27 @@ duration: Specifies the time to sleep in seconds. The number must be an integer 
 ## Basic Sleep Example
 
 ```4gl
-define i integer = 1
+i = integer;
+i = 1;
 
-while i <= 3
-do
-    call printf("Iteration: %d\n", i)
-    let i = i + 1
-    sleep 2  -- Sleep for 2 seconds
-endwhile
-call printf("Finished.\n")
+WHILE i <= 3 DO
+    MESSAGE i;
+    let i = i + 1;
+    sleep 2;
+ENDWHILE;
 ```
 
 ## Pause Before User Input
 ```4gl
-define user_input integer
+user_input = integer;
+IF user_input > 10 then
+    MESSAGE "Input is greater than 10.";
+ELSE
+    MESSAGE "Input is less than or equal to 10.";
+ENDIF
 
-call printf("Please enter a number: ")
-call scanf("%d", user_input)
-
-if user_input > 10 then
-    call printf("Input is greater than 10.\n")
-else
-    call printf("Input is less than or equal to 10.\n")
-endif
-
-sleep 3  -- Pause for 3 seconds
-call printf("End of program.\n")
+sleep 3;
+MESSAGE "End of program.";
 ```
 
 ## Notes
