@@ -1,63 +1,33 @@
 # The `prompt` statement in Actian 4GL
 
-The `prompt` statement in Actian 4GL is used to display a message to the user and wait for input from the user. It is 
-commonly used to interactively gather input from the user during program execution.
+The prompt statement in Actian OpenROAD 6.2 displays a message in a pop-up window and accepts input from the application user.
 
 ## Syntax
-
 ```4gl
-prompt "message" variable [help "help_message"] [options] [at position row, column] [with attributes attribute]
+variable = prompt varcharstringexpr;
 ```
 
-- message: Required. Specifies the message displayed to the user.
-- variable: Required. Specifies the variable to store the user's input.
-- help: Optional. Specifies a help message displayed to the user.
-- options: Optional. Specifies options available to the user.
-- position: Optional. Specifies the position on the screen where the prompt is displayed.
-- attributes: Optional. Specifies display attributes such as color, highlighting, etc.
+## Description
+The prompt statement causes the application to request input from the user. It displays a character string message on the screen, accepts the input from the user, and places the user's response into a designated variable.
+- The prompt is displayed in a pop-up window centered in the calling frame.
+- This pop-up window covers the calling frame until the user acknowledges the prompt.
 
-## Basic Prompt Example
+## Parameters
+### variable
+Specifies the name of a varchar variable to which the user's response is assigned. If the response is longer than the variable, OpenROAD truncates the response on the right.
+
+### varcharstringexpr
+Specifies the message to be displayed. This message must be a varchar expression with a maximum length of 2000 characters.
+
+## Examples
+### Example 1: Prompt for a Report Name
+Prompt for a report name and place the response in the answer variable:
 ```4gl
-define name char(50)
-
-prompt "Enter your name: " name
-call printf("Hello, %s!\n", name)
+answer = prompt 'Enter the report name: ';
 ```
 
-In this example:
-- The prompt statement displays "Enter your name: " to the user.
-- The user enters their name, which is stored in the variable name.
-- The program then prints a greeting using the entered name.
-
-## Prompt with Help Example
+## Example 2: Prompt for Department
+Prompt the user for the department of the person whose name appears in the fname and lname fields:
 ```4gl
-define age integer
-
-prompt "Enter your age: " age help "Please enter your age in years."
-call printf("You are %d years old.\n", age)
+answer = prompt 'Enter the department for ' + fname + ' ' + lname;
 ```
-
-In this example:
-- The prompt statement displays "Enter your age: " to the user.
-- It also provides a help message "Please enter your age in years." to assist the user.
-- The user enters their age, which is stored in the variable age.
-- The program then prints the entered age.
-
-## Prompt with Options Example
-```4gl
-define choice char(1)
-
-prompt "Choose an option (A, B, C): " choice options "A, B, C"
-call printf("You chose option %s.\n", choice)
-```
-
-In this example:
-- The prompt statement displays "Choose an option (A, B, C): " to the user.
-- It specifies options "A, B, C" that the user can choose from.
-- The user selects an option, which is stored in the variable choice.
-- The program then prints the chosen option.
-
-## Notes
-The prompt statement is primarily used for interactive input from the user.
-It supports displaying a message, providing help, specifying options, and setting display attributes.
-The entered value is stored in the specified variable for further processing within the program.
