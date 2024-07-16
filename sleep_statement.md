@@ -25,12 +25,12 @@ ENDWHILE;
 
 ## Pause Before User Input
 ```4gl
-user_input = integer;
+user_input = 10;
 IF user_input > 10 then
     MESSAGE "Input is greater than 10.";
 ELSE
     MESSAGE "Input is less than or equal to 10.";
-ENDIF
+ENDIF;
 
 sleep 3;
 MESSAGE "End of program.";
