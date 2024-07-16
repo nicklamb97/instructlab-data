@@ -13,18 +13,18 @@ The return statement:
 - Returns the user to the calling frame, procedure, or method.
 
 ## Behavior:
-# Frame Called by callframe:
+### Frame Called by callframe:
 - Closes the frame.
 - Returns control to the calling frame, procedure, or method at the statement following the callframe statement.
-# Frame Initiated through openframe:
+### Frame Initiated through openframe:
 - Closes the frame.
 - User must initiate interaction with an active frame.
-# Returning from Called Procedure/Method:
+### Returning from Called Procedure/Method:
 - Passes control back to the calling frame, procedure, or method.
 - Resumes execution at the statement following the callproc statement or method invocation.
-# Parent of Opened Frames:
+### Parent of Opened Frames:
 - Sends a Terminate event to these frames and then closes them.
-# All Active Frames/Procedures are Children:
+### All Active Frames/Procedures are Children:
 - Closes the entire application, functioning as an exit statement.
 
 ## Passing Values
@@ -43,6 +43,6 @@ begin
 end
 ```
 
-Notes
+## Notes
 The return statement is essential for controlling the flow of execution between different frames, procedures, and methods.
 It ensures proper closure of frames and passing of control and values back to the caller.
