@@ -1,67 +1,48 @@
 # The `return` statement in Actian 4GL
 
-The return statement in Actian 4GL is used to exit a subroutine or function and optionally return a value to the caller. This statement is essential for controlling program flow and passing data back to the calling routine.
+The return statement in Actian OpenROAD 6.2 is used to close the current frame or called procedure and return to the calling frame or procedure. It can also pass a value back to the caller.
 
 ## Syntax
-
 ```4gl
 return [expression];
 ```
 
-expression: Optional. Specifies the value to be returned to the calling routine.
+## Description
+The return statement:
+- Closes the current frame, procedure, or method.
+- Returns the user to the calling frame, procedure, or method.
 
-## Basic Return Example
-```4gl
-function integer add_numbers(integer a, integer b)
-    define result integer
-    let result = a + b
-    return result
-end function
+## Behavior:
+# Frame Called by callframe:
+- Closes the frame.
+- Returns control to the calling frame, procedure, or method at the statement following the callframe statement.
+# Frame Initiated through openframe:
+- Closes the frame.
+- User must initiate interaction with an active frame.
+# Returning from Called Procedure/Method:
+- Passes control back to the calling frame, procedure, or method.
+- Resumes execution at the statement following the callproc statement or method invocation.
+# Parent of Opened Frames:
+- Sends a Terminate event to these frames and then closes them.
+# All Active Frames/Procedures are Children:
+- Closes the entire application, functioning as an exit statement.
 
-define sum integer
-let sum = add_numbers(5, 3)
-call printf("Sum: %d\n", sum)
-```
+## Passing Values
+The return statement can pass a value (such as a return status) back to the calling frame, procedure, or method. For a frame called with openframe, any return value is ignored.
 
-In this example:
-- The function add_numbers accepts two integers a and b.
-- It calculates their sum and returns the result using return result.
-- The returned value (8) is assigned to sum, which is then printed.
+## Parameters
+expression: Specifies a value returned to the calling frame or procedure. The value must be compatible with the return data type of the called frame, global procedure, or method as defined in the visual development environment.
 
-## Returning Early Example
-
-```4gl
-function integer find_index(string array[], string value)
-    define i integer
-    for i = 1 to dim(array)
-        if array[i] = value then
-            return i
-        endif
-    end for
-    return 0
-end function
-```
-
-In this example:
-- The function find_index searches for value in array.
-- If value is found, it returns the index immediately using return i.
-- If value is not found after looping through the array, it returns 0.
-
-## Void Function Example
+## Example
+At the end of an operation, return control to the calling frame, passing back the value in the status variable:
 
 ```4gl
-subroutine print_message(string message)
-    call printf("%s\n", message)
-    return
-end subroutine
+on click file.end =
+begin
+    return status;
+end
 ```
 
-In this example:
-- The subroutine print_message prints a message to the console.
-- It does not return any value (return without an expression).
-- Subroutines in Actian 4GL typically use return without an expression to exit.
-
-## Notes
-The return statement can only be used within functions and subroutines.
-If an expression is provided, it must match the return type defined in the function or subroutine header.
-Using return without an expression exits the function or subroutine immediately.
+Notes
+The return statement is essential for controlling the flow of execution between different frames, procedures, and methods.
+It ensures proper closure of frames and passing of control and values back to the caller.
