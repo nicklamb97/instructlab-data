@@ -1,47 +1,80 @@
-Delete Statement
-This statement deletes rows from a database table.
-This statement has the following syntax:
-•Non-cursor version:
-[repeated] delete from tablename [corrname]
-     [where searchcondition];
-•Cursor version:
-delete from tablename where current of cursor_variable;
-The non-cursor version of the delete statement deletes selected rows from a table. The cursor version deletes one row at a time.
-Non-cursor Version
-The where clause in the non-cursor version lets you select the rows you want to delete. If you omit the where clause, the statement deletes all of the rows in the table.
-The repeated keyword tells OpenROAD to encode and save the query execution plan for the statement. Use this method as a performance enhancement if you intend to run the query more than once in your program.
-Note:  This keyword is supported for Ingres database systems only. If other DBMS systems are being used, it is ignored.
-The saved query execution plan is based on the initial values found in all parameters of the syntax. Therefore, do not use the repeated option if the where clause searchcondition is represented by a single variable or if your table name is a dynamic name.
-Cursor Version
-The cursor version of the delete statement deletes the row to which the specified cursor is pointing. The cursor is specified in the "where current of" clause. The value of cursor_variable must be the name of a reference variable that points to an object of the CursorObject class. The table name that you specify in a cursor delete statement must match the name of the table that you specified in the cursor's open statement.
-Before you can issue a delete statement for a cursor, you must first open the cursor and fetch a row. If you open the cursor for direct update, any deletions take effect immediately. If you open the cursor for deferred update, any deletions take effect when you close the cursor.
-You must execute a cursor delete statement in the same DBMS session in which you opened the cursor.
-A successful cursor delete statement sets the State attribute of the CursorObject to CS_NOCURRENT, indicating that the cursor is now inting to a position after the deleted row but before the next row. You must issue another fetch statement before issuing another delete statement (or an update statement). A successful delete cursor statement also sets the IIrowcount system variable to one.
-Parameters--Delete Statement
-This statement has the following parameters:
-tablename
-Specifies the name of the table from which the row is deleted. It is used in both versions of the delete statement. This is a dynamic name.
-corrname
-Specifies the correlation name of the table. It is used in only the non-cursor version.
-searchcondition
-Specifies a logical expression of conditions that must be satisfied by all rows selected. You can use simple variables in a search condition wherever you can use a constant. Alternatively, you can place the entire search condition in a single varchar variable.
-cursor_variable
-Specifies the reference variable that points to the CursorObject for which the statement is issued. It is used only in the cursor version.
-Examples--Delete Statement
-Delete all rows in the personnel table containing the employee number (empno) displayed in the current frame, using the repeated option, then commit the changes:
+# Delete Statement
+
+The `delete` statement removes rows from a database table.
+
+## Syntax
+
+- **Non-cursor version:**
+  ```
+  [repeated] delete from tablename [corrname]
+       [where searchcondition];
+  ```
+
+- **Cursor version:**
+  ```
+  delete from tablename where current of cursor_variable;
+  ```
+
+### Non-cursor Version
+
+The non-cursor version of the `delete` statement deletes selected rows from a table based on the specified conditions in the `where` clause. If the `where` clause is omitted, all rows in the table are deleted.
+
+The `repeated` keyword optimizes query performance by saving and reusing the query execution plan for subsequent executions, applicable only to Ingres database systems.
+
+### Cursor Version
+
+The cursor version deletes the row that is currently pointed to by the specified cursor. The cursor must be opened and fetched before issuing a `delete` statement.
+
+Before using a cursor delete statement:
+- Ensure the cursor is opened and, if necessary, fetched.
+- For direct update cursors, deletions are immediate; for deferred update cursors, deletions take effect when the cursor is closed.
+
+After a successful cursor delete statement, the CursorObject's State attribute is set to `CS_NOCURRENT`, indicating the cursor is positioned after the deleted row but before the next row.
+
+## Parameters
+
+- **tablename**: Specifies the name of the table from which rows are deleted.
+- **corrname**: Correlation name of the table used in the non-cursor version.
+- **searchcondition**: Logical expression defining the conditions for row selection.
+- **cursor_variable**: Reference variable pointing to the CursorObject used in the cursor version.
+
+## Examples
+
+### Example 1: Non-cursor Delete
+
+Delete all rows in the `personnel` table where `empno` matches the current frame, using the `repeated` option, then commit the changes:
+```sql
 repeated delete from personnel
           where personnel.empno = :empno;
 commit;
-Delete all rows in the personnel table:
+```
+
+### Example 2: Non-cursor Delete
+
+Delete all rows in the `personnel` table:
+```sql
 delete from personnel;
-Delete all rows in the table specified in the tablename field:
-delete from :tablename;
-Delete rows from a table, using variables in the statement to represent the table name and the where clause search condition:
+```
+
+### Example 3: Non-cursor Delete with Variables
+
+Delete rows from a dynamically specified table (`tablename`) and condition (`whereclause`):
+```sql
 whereclause = 'empno = 12';
 tablename = 'personnel';
 delete from :tablename where :whereclause;
-Delete the row pointed to by the emp_cursor object:
+```
+
+### Example 4: Cursor Delete
+
+Delete the row pointed to by the `emp_cursor` cursor object:
+```sql
 delete from emp where current of emp_cursor;
 if iirowcount = 0 then
 message 'Delete failed';
 endif;
+```
+
+*Note:* Replace `emp` and `emp_cursor` with appropriate table and cursor names.
+
+*Note:* To delete rows from a table specified by a dynamic name, use `delete from :tablename`.
