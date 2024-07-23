@@ -1,5 +1,5 @@
 # Describe Statement
-The describe statement in Actian 4GL retrieves a list of the attributes of a class or array.
+The describe statement in Actian 4GL retrieves a list of the attributes of a class or array
 
 ## Syntax
 
