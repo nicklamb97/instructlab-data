@@ -1,5 +1,5 @@
 # Clear Array Statement
-The clear array statement clears an array in Actian 4GL.
+The clear array statement clears an array in Actian 4GL
 
 ## Syntax
 ```4gl
